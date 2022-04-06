@@ -21,30 +21,25 @@
 
 /* util.c */
 int get_block(int dev, int blk, char *buf);
-
 int put_block(int dev, int blk, char *buf);
-
 int tokenize(char *pathname);
-
 MINODE *iget(int dev, int ino);
-
-void iput(MINODE *mip);
-
+int iput(MINODE *mip);
 int getino(char *pathname);
-
 int findmyname(MINODE *parent, u32 myino, char myname[]);
-
 int findino(MINODE *mip, u32 *myino);
 
 /* cd_ls_pwd.c */
 int cd();
-
 int ls_file(MINODE *mip, char *name);
-
 int ls_dir(MINODE *mip);
-
 int ls();
-
 void pwd(MINODE *wd);
+
+/* link_unlink_symlink_readlink */
+int link(char *old_file, char *new_file);
+int unlink(char *filename);
+int symlink(char *old_file, char *new_file);
+int readlink(char *file, char *buf);
 
 #endif

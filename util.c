@@ -103,20 +103,29 @@ MINODE *iget(int dev, int ino)
   return 0;
 }
 
-void iput(MINODE *mip)
+int iput(MINODE *mip)
 {
  int i, block, offset;
  char buf[BLKSIZE];
  INODE *ip;
 
- if (mip==0) 
-     return;
-
+ if (mip == 0) 
+   return -1;
  mip->refCount--;
+ if (mip->refCount > 0)
+   return -1;
+ if (!mip->dirty)
+   return -1;
  
- if (mip->refCount > 0) return;
- if (!mip->dirty)       return;
- 
+ block = (mip->ino -1) / 8 + iblk;
+ offset = (mip->ino -1) % 8;
+
+ get_block(mip->dev, block, buf);
+ ip = (INODE *)buf + offset;
+ *ip = mip->INODE;
+ put_block(mip->dev, block, buf);
+
+ return 0;
  /* write INODE back to disk */
  /**************** NOTE ******************************
   For mountroot, we never MODIFY any loaded INODE
@@ -125,6 +134,7 @@ void iput(MINODE *mip)
 
   Write YOUR code here to write INODE back to disk
  *****************************************************/
+ 
 } 
 
 int search(MINODE *mip, char *name)
