@@ -95,5 +95,15 @@ int symlink(char *old_file, char *new_file){
 }
 
 int readlink(char *file, char *buf){
-    
+    int ino;
+    MINODE *mip;
+    ino = getino(file);
+    mip = iget(dev, ino);
+    if(!S_ISLNK(mip->INODE.i_mode)){
+        printf("ERROR: NOT A LNK\n");
+    }
+
+    strncpy(mip->INODE.i_block, file, buf);
+
+    return mip->INODE.i_size = strlen(file) +1;
 }
