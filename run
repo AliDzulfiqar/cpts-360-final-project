@@ -1,0 +1,7 @@
+#! /bin/sh
+
+cp disk.ori disk
+
+mk
+
+./a.out

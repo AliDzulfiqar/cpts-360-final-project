@@ -1,0 +1,5 @@
+#! /bin/sh
+
+sudo mount disk /mnt 
+sudo ls -a -i -l /mnt 
+sudo umount/mnt
