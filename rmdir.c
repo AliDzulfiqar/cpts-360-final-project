@@ -1,4 +1,4 @@
-#include "command.h"
+#include "functions.h"
 #include "dealloc.h"
 
 extern MINODE minode[NMINODE];

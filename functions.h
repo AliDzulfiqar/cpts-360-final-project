@@ -40,6 +40,16 @@ void pwd(MINODE *wd);
 int link(char *old_file, char *new_file);
 int unlink(char *filename);
 int symlink(char *old_file, char *new_file);
-int readlink(char *file, char *buf);
+// int readlink(char *file, char *buf);
+
+/* mkdir_creat */
+int mk_dir(char *pathname);
+int kmkdir(MINODE *pip, char *name);
+int my_creat(char *pathname);
+int kcreat(MINODE *pip, char *name);
+
+/* rmdir */
+int rm_dir(char *pathname);
+int test_emptydir(MINODE *mip);
 
 #endif

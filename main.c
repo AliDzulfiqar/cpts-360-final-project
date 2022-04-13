@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 
     while (1)
     {
-        printf("input command : [ls|cd|pwd|quit] ");
+        printf("input command : [ls|cd|pwd|link|unlink|symlink|quit] ");
         fgets(line, 128, stdin);
         line[strlen(line) - 1] = 0;
 
